@@ -1,0 +1,107 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  width: 360px;
+  background: #f5f7fb;
+  color: #1f2a37;
+}
+
+main {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 16px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.edge-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.edge-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.edge-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid #d8e1eb;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.edge-title {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.edge-actions {
+  display: flex;
+  gap: 6px;
+}
+
+input,
+select,
+button {
+  border-radius: 8px;
+  border: 1px solid #cfd8e3;
+  padding: 8px;
+  font-size: 12px;
+}
+
+button {
+  background: white;
+  cursor: pointer;
+}
+
+button.primary {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+  color: white;
+  font-weight: 600;
+}
+
+.ghost {
+  background: #eef2f7;
+}
+
+.compact {
+  padding: 6px 10px;
+  white-space: nowrap;
+}
+
+#status,
+.edge-card p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #475569;
+}
