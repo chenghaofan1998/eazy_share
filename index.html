@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Eazy Share</title>
+    <style>
+      :root {
+        --bg: #f6f1ea;
+        --bg-alt: #e7effa;
+        --card: rgba(255, 255, 255, 0.88);
+        --text: #18212f;
+        --muted: #536173;
+        --accent: #275df0;
+        --accent-2: #ec6b2d;
+        --line: rgba(24, 33, 47, 0.1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", "PingFang SC", "Noto Sans SC", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(255, 255, 255, 0.65), transparent 35%),
+          linear-gradient(160deg, var(--bg) 0%, var(--bg-alt) 100%);
+      }
+
+      main {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 56px 20px 80px;
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        box-shadow: 0 18px 45px rgba(24, 33, 47, 0.08);
+        padding: 32px;
+        backdrop-filter: blur(14px);
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(2rem, 4vw, 3.4rem);
+        line-height: 1.02;
+      }
+
+      h2 {
+        margin: 32px 0 12px;
+        font-size: 1.15rem;
+      }
+
+      p {
+        margin: 0 0 14px;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        margin-bottom: 16px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: rgba(39, 93, 240, 0.08);
+        color: var(--accent);
+        font-size: 0.92rem;
+        font-weight: 700;
+      }
+
+      .actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin: 28px 0 8px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        padding: 0 18px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .button.primary {
+        background: var(--text);
+        color: white;
+      }
+
+      .button.secondary {
+        background: white;
+        color: var(--text);
+        border: 1px solid var(--line);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
+        margin-top: 28px;
+      }
+
+      .tile {
+        padding: 18px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.68);
+        border: 1px solid rgba(24, 33, 47, 0.08);
+      }
+
+      .tile strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      footer {
+        margin-top: 26px;
+        font-size: 0.95rem;
+        color: var(--muted);
+      }
+
+      a {
+        color: var(--accent);
+      }
+
+      .star {
+        color: var(--accent-2);
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="card">
+        <div class="eyebrow">Eazy Share</div>
+        <h1>Turn long web articles into clean, shareable images.</h1>
+        <p>
+          Eazy Share is a browser extension for capturing long web pages, cropping
+          distractions, exporting split images, and attaching a QR code back to the
+          original page.
+        </p>
+        <p>
+          Eazy Share 是一个把网页长文转换成可分享图片的浏览器扩展，支持裁剪无关区域、导出分图，并通过二维码返回原网页。
+        </p>
+
+        <div class="actions">
+          <a class="button primary" href="./privacy-policy.html">Privacy Policy</a>
+          <a class="button secondary" href="https://github.com/chenghaofan1998/eazy_share">GitHub Repository</a>
+        </div>
+
+        <div class="grid">
+          <div class="tile">
+            <strong>What it does</strong>
+            <p>Full-page screenshot, long article capture, split export, and QR back-links.</p>
+          </div>
+          <div class="tile">
+            <strong>适合场景</strong>
+            <p>网页长截图、文章分享、裁掉侧边栏与广告、把长文整理成更适合传播的图片。</p>
+          </div>
+          <div class="tile">
+            <strong>Open source</strong>
+            <p>
+              View the source on GitHub. If it helps, please give the project a
+              <span class="star">Star</span>.
+            </p>
+          </div>
+        </div>
+
+        <footer>
+          Repository: <a href="https://github.com/chenghaofan1998/eazy_share">github.com/chenghaofan1998/eazy_share</a>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>
