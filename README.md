@@ -74,6 +74,16 @@ Downloads/longshot/
 npm test
 ```
 
+隐私政策：
+
+- [docs/privacy-policy.md](/mnt/f/paste_share/docs/privacy-policy.md)
+
+GitHub 仓库：
+
+- <https://github.com/chenghaofan1998/eazy_share>
+
+如果这个项目对你有帮助，欢迎点一个 Star。
+
 ### 当前状态
 
 这是一个仍在持续迭代的 MVP。
@@ -161,6 +171,16 @@ Run tests:
 ```bash
 npm test
 ```
+
+Privacy policy:
+
+- [docs/privacy-policy.md](/mnt/f/paste_share/docs/privacy-policy.md)
+
+GitHub repository:
+
+- <https://github.com/chenghaofan1998/eazy_share>
+
+If this project is useful to you, please consider giving it a star.
 
 ### Status
 

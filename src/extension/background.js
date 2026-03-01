@@ -1,4 +1,5 @@
 import { clampMaxHeight, getGridCount, validateOptionalUrl } from "./shared.js";
+import { QrCode, QrSegment } from "./qr-local.js";
 
 async function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -85,20 +86,50 @@ async function blobToDataUrl(blob) {
 
 const qrCache = new Map();
 
-async function getQrBitmap(link) {
+function getQrMatrix(link) {
   if (!link) return null;
   if (qrCache.has(link)) return qrCache.get(link);
+
   try {
-    const endpoint = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&margin=0&data=${encodeURIComponent(link)}`;
-    const res = await fetch(endpoint);
-    if (!res.ok) return null;
-    const blob = await res.blob();
-    const bmp = await createImageBitmap(blob);
-    qrCache.set(link, bmp);
-    return bmp;
+    const qr = QrCode.encodeSegments(
+      QrSegment.makeSegments(link),
+      QrCode.Ecc.MEDIUM,
+      1,
+      20
+    );
+    qrCache.set(link, qr);
+    return qr;
   } catch {
     return null;
   }
+}
+
+function drawQrCode(ctx, qr, x, y, size) {
+  if (!qr) return false;
+
+  const moduleCount = qr.size;
+  const quietZone = 4;
+  const fullCount = moduleCount + quietZone * 2;
+  const moduleSize = size / fullCount;
+
+  ctx.save();
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(x, y, size, size);
+  ctx.fillStyle = "#111827";
+
+  for (let row = 0; row < moduleCount; row += 1) {
+    for (let col = 0; col < moduleCount; col += 1) {
+      if (!qr.getModule(col, row)) continue;
+      const left = x + (col + quietZone) * moduleSize;
+      const top = y + (row + quietZone) * moduleSize;
+      const drawWidth = Math.ceil(left + moduleSize) - Math.floor(left);
+      const drawHeight = Math.ceil(top + moduleSize) - Math.floor(top);
+      ctx.fillRect(Math.floor(left), Math.floor(top), drawWidth, drawHeight);
+    }
+  }
+
+  ctx.restore();
+  return true;
 }
 
 function drawRoundedRect(ctx, x, y, width, height, radius) {
@@ -137,20 +168,6 @@ function fitText(ctx, text, maxWidth) {
     }
   }
   return `${text.slice(0, low)}${ellipsis}`;
-}
-
-function parseLinkMeta(link) {
-  try {
-    const url = new URL(link);
-    const pathname = url.pathname === "/" ? "" : url.pathname;
-    return {
-      host: url.hostname.replace(/^www\./i, ""),
-      path: pathname,
-      scheme: url.protocol.replace(":", "").toUpperCase()
-    };
-  } catch {
-    return { host: "Website", path: link, scheme: "LINK" };
-  }
 }
 
 function getFooterCopy(language) {
@@ -200,22 +217,21 @@ async function drawQrFooter(ctx, width, height, link, language = "en") {
 
   fillRoundedRect(ctx, cardX, cardY, cardWidth, cardHeight, 30, "rgba(255, 255, 255, 0.82)");
 
-  const qr = await getQrBitmap(link);
+  const qr = getQrMatrix(link);
   const qrFrameSize = 148;
   const qrSize = 108;
   const qrX = cardX + 26;
   const qrY = cardY + Math.floor((cardHeight - qrFrameSize) / 2);
   fillRoundedRect(ctx, qrX, qrY, qrFrameSize, qrFrameSize, 30, "#111827");
   fillRoundedRect(ctx, qrX + 12, qrY + 12, qrFrameSize - 24, qrFrameSize - 24, 20, "#ffffff");
-  if (qr) {
-    ctx.drawImage(
-      qr,
-      qrX + Math.floor((qrFrameSize - qrSize) / 2),
-      qrY + Math.floor((qrFrameSize - qrSize) / 2),
-      qrSize,
-      qrSize
-    );
-  } else {
+  const qrDrawn = drawQrCode(
+    ctx,
+    qr,
+    qrX + Math.floor((qrFrameSize - qrSize) / 2),
+    qrY + Math.floor((qrFrameSize - qrSize) / 2),
+    qrSize
+  );
+  if (!qrDrawn) {
     ctx.fillStyle = "#e2e8f0";
     fillRoundedRect(ctx, qrX + 10, qrY + 10, qrFrameSize - 20, qrFrameSize - 20, 18, "#e2e8f0");
   }

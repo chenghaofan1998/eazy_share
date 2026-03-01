@@ -1,9 +1,10 @@
 {
-  "name": "longshot-mvp",
-  "version": "0.1.0",
+  "name": "eazy-share",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
+    "generate:icons": "node scripts/generate-extension-icons.mjs",
     "test": "node --test tests/**/*.test.js"
   }
 }
